@@ -1,25 +1,48 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import {Platform,  View, Text, StyleSheet} from 'react-native';
+import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 
-function App() {
+const theme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: 'tomato',
+    accent: 'yellow',
+  },
+};
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <PaperProvider theme={theme}>
+      <React.Fragment>
+        {/* {Platform.OS === 'web' ? (
+          <style type="text/css">{`
+            @font-face {
+              font-family: 'MaterialCommunityIcons';
+              src: url(${require('react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf')}) format('truetype');
+            }
+          `}</style>
+        ) : null} */}
+        <View style={styles.container}>
+          <Text style={styles.text}>Hey! This is the WEB.</Text>
+        </View>
+      </React.Fragment>
+    </PaperProvider>
+    
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#FF0FF1',
+    height: Platform.OS === 'web' ? '100vh' : '100%'
+  },
+  text: {
+    fontSize:30
+  }
+})
 
 export default App;
